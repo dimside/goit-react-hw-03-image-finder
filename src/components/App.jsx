@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { ColorRing } from 'react-loader-spinner';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 import { Searchbar } from './Searchbar/Searchbar';
 import { getImages } from 'service/image-service';
 import { ImageGallery } from './ImageGallery/ImageGallery';
@@ -65,7 +67,14 @@ export class App extends Component {
 
   handleSearchSubmit = value => {
     if (value === '') {
-      alert('What do you want to find?');
+      toast.info('Search field must be filled!', {
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
       return;
     }
     this.setState({
@@ -87,9 +96,9 @@ export class App extends Component {
     return (
       <Container>
         <Searchbar onSearchSubmit={this.handleSearchSubmit} />
+        <ToastContainer position="top-right" autoClose={2000} />
         {isEmpty && <InfoMessages>There are on images... </InfoMessages>}
         {status === Status.REJECTED && <InfoMessages>{error}</InfoMessages>}
-
         {<ImageGallery images={images} />}
         {status === Status.PENDING && (
           <Spinner>
