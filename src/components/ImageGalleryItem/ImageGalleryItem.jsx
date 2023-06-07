@@ -24,9 +24,9 @@ export class ImageGalleryItem extends Component {
 
     return (
       <ImageItem>
-        <a href="#" onClick={this.openModal}>
+        <span onClick={this.openModal}>
           <ImageGalleryItemImage src={`${webformatURL}`} alt={`${tags}`} />
-        </a>
+        </span>
         {isModalOpen && (
           <Modal image={largeImageURL} alt={tags} onClose={this.closeModal} />
         )}
