@@ -46,13 +46,12 @@ export class App extends Component {
         return;
       }
 
-      if (data.total / 12 <= page) {
+      if (Math.ceil(data.totalHits / 12) === page) {
         this.setState({
           isCollectionEnding: true,
-          status: Status.IDLE,
+          status: Status.RESOLVED,
           value: '',
         });
-        return;
       }
 
       this.setState(({ images: prevImages }) => ({
